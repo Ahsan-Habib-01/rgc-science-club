@@ -12,7 +12,7 @@
         /* --- ELITE THEME CONFIGURATION --- */
         :root {
             --primary: #0a192f;    /* Dark Navy */
-            --secondary: #172a45;  /* Lighter Navy */
+            --secondary: #112240;  /* Lighter Navy */
             --accent: #64ffda;     /* Tech Cyan */
             --gold: #d4af37;       /* Metallic Gold */
             --text-light: #e6f1ff;
@@ -26,12 +26,30 @@
             background-color: var(--primary);
             color: var(--text-light);
             line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
+            
+            /* --- SCIENTIFIC BACKGROUND PATTERN (CSS) --- */
+            background-image: radial-gradient(#1f3a60 1.5px, transparent 1.5px), radial-gradient(#1f3a60 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            /* This creates a subtle atomic/grid look */
         }
 
-        /* --- NAVIGATION BAR --- */
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- NAVIGATION --- */
         nav {
-            background: rgba(10, 25, 47, 0.95);
+            background: rgba(10, 25, 47, 0.9);
             padding: 0 5%;
             display: flex;
             justify-content: space-between;
@@ -40,11 +58,13 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
             backdrop-filter: blur(10px);
+            
+            /* Nav Animation */
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        /* LOGO */
         .brand {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
@@ -65,7 +85,6 @@
             object-fit: cover;
         }
 
-        /* DESKTOP MENU (Hidden on Mobile) */
         .nav-menu {
             display: flex;
             gap: 30px;
@@ -87,9 +106,8 @@
         }
         .nav-link:hover { color: var(--accent); }
 
-        /* DROPDOWN (Desktop) */
+        /* Dropdown */
         .nav-item { position: relative; }
-        
         .dropdown {
             position: absolute;
             top: 100%;
@@ -106,13 +124,11 @@
             padding: 10px 0;
             border-radius: 0 0 5px 5px;
         }
-
         .nav-item:hover .dropdown {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-
         .dropdown li a {
             display: block;
             padding: 10px 20px;
@@ -134,7 +150,6 @@
             border-radius: 4px;
         }
 
-        /* --- MOBILE MENU BUTTON (Hamburger) --- */
         .menu-btn {
             display: none;
             color: var(--accent);
@@ -152,17 +167,46 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            background: radial-gradient(circle at center, #172a45 0%, #0a192f 70%);
+            /* Gradient Overlay to make text readable over pattern */
+            background: radial-gradient(circle at center, transparent 0%, var(--primary) 90%);
         }
+        
         .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
             margin-bottom: 20px;
             color: var(--text-light);
             line-height: 1.2;
+            
+            /* Animation */
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
         }
+        
         .hero span { color: var(--gold); }
-        .hero p { max-width: 600px; margin-bottom: 40px; color: var(--text-dim); }
+        
+        .hero p { 
+            max-width: 600px; 
+            margin-bottom: 40px; 
+            color: var(--text-dim);
+            
+            /* Animation */
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .hero-btn {
+            color: var(--accent); 
+            border-bottom: 1px solid var(--accent); 
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            
+            /* Animation */
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+        .hero-btn:hover { padding-bottom: 5px; }
 
         /* --- FOOTER --- */
         footer {
@@ -177,14 +221,23 @@
             justify-content: space-between;
             gap: 40px;
         }
+        
+        .contact-list-wrapper {
+            display: inline-block;
+            text-align: left;
+        }
+        
         .contact-item {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 15px;
             color: var(--text-dim);
+            transition: 0.3s;
         }
-        .contact-item i { color: var(--accent); width: 20px; }
+        .contact-item:hover { color: var(--accent); }
+        .contact-item i { color: var(--accent); width: 25px; text-align: center; }
+
         .copyright {
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.05);
@@ -194,17 +247,17 @@
             color: #555;
         }
 
-        /* --- MOBILE RESPONSIVE DESIGN --- */
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 900px) {
-            .menu-btn { display: block; } /* Show menu button */
-
+            .menu-btn { display: block; }
+            
             .nav-menu {
                 position: fixed;
                 top: 0;
-                right: -100%; /* Hidden by default */
+                right: -100%;
                 width: 70%;
                 height: 100vh;
-                background: #112240; /* Slightly lighter navy for sidebar */
+                background: #112240;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: flex-start;
@@ -214,20 +267,12 @@
                 z-index: 1001;
                 overflow-y: auto;
             }
-
-            .nav-menu.active { right: 0; } /* Slide in when active */
-
+            .nav-menu.active { right: 0; }
             .nav-item { width: 100%; margin-bottom: 15px; }
-
-            .nav-link {
-                font-size: 1.1rem;
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            /* Fix Dropdown for Mobile */
+            .nav-link { font-size: 1.1rem; width: 100%; justify-content: space-between; }
+            
             .dropdown {
-                position: static; /* Stack naturally in mobile */
+                position: static;
                 visibility: visible;
                 opacity: 1;
                 transform: none;
@@ -236,16 +281,19 @@
                 border: none;
                 padding-left: 20px;
                 border-left: 1px solid rgba(100, 255, 218, 0.1);
-                display: none; /* Hidden until toggled */
+                display: none;
             }
-
-            /* Show dropdown when parent is clicked (JS handled) */
             .nav-item.open .dropdown { display: block; }
             .nav-item.open .nav-link i { transform: rotate(180deg); }
 
             .hero h1 { font-size: 2.2rem; }
-            .footer-content { flex-direction: column; text-align: center; }
-            .contact-item { justify-content: center; }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .contact-list-wrapper { margin-top: 20px; }
         }
     </style>
 </head>
@@ -295,22 +343,38 @@
     <section class="hero">
         <h1>Exploring the <br> <span>Frontiers of Science</span></h1>
         <p>Welcome to the official platform of Rangpur Govt. College Science Club. We innovate, we research, we lead.</p>
-        <a href="#" style="color: var(--accent); border-bottom: 1px solid var(--accent); text-decoration: none;">Explore Activities &rarr;</a>
+        <a href="#" class="hero-btn">Explore Activities &rarr;</a>
     </section>
 
     <footer>
         <div class="footer-content">
-            <div style="max-width: 300px;">
+            
+            <div style="max-width: 300px; margin-bottom: 20px;">
                 <h2 style="color: var(--gold); margin-bottom: 15px; font-family: 'Playfair Display', serif;">RGC Science Club</h2>
                 <p style="color: var(--text-dim); font-size: 0.9rem;">Excellence in Science & Research since 2023.</p>
             </div>
 
             <div>
                 <h3 style="color: var(--text-light); margin-bottom: 20px;">Contact Us</h3>
-                <div class="contact-item"><i class="fa-solid fa-envelope"></i> mdahsanhabibonup@gmail.com</div>
-                <div class="contact-item"><i class="fa-solid fa-phone"></i> +880 1847-741974</div>
-                <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Rangpur Govt. College</div>
+                
+                <div class="contact-list-wrapper">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i> 
+                        <span>mdahsanhabibonup@gmail.com</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i> 
+                        <span>+880 1847-741974</span>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i> 
+                        <span>Rangpur Govt. College</span>
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <div class="copyright">
@@ -319,14 +383,10 @@
     </footer>
 
     <script>
-        // Toggle Sidebar
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
             const btn = document.querySelector('.menu-btn i');
-            
             menu.classList.toggle('active');
-            
-            // Icon change (Bars <-> Times)
             if(menu.classList.contains('active')) {
                 btn.classList.remove('fa-bars');
                 btn.classList.add('fa-times');
@@ -336,9 +396,7 @@
             }
         }
 
-        // Toggle Dropdowns on Mobile
         function toggleDropdown(element) {
-            // Only work on mobile (screen less than 900px)
             if (window.innerWidth <= 900) {
                 element.classList.toggle('open');
             }
