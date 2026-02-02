@@ -26,7 +26,7 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--primary);
             color: var(--text-light);
-            line-height: 1.8; /* Better readability for text */
+            line-height: 1.8;
         }
 
         /* --- NAV BAR --- */
@@ -45,7 +45,6 @@
         /* --- PAGE HEADER --- */
         .page-header {
             text-align: center; padding: 100px 20px 60px;
-            /* Background Image */
             background: linear-gradient(rgba(10,25,47,0.9), rgba(10,25,47,0.8)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80');
             background-size: cover; background-position: center;
             border-bottom: 1px solid var(--accent);
@@ -61,17 +60,12 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 50px 20px; }
 
-        /* --- SUMMARY SECTION --- */
+        /* --- SUMMARY SECTION (IMAGE REMOVED) --- */
         .summary-section {
             display: flex; flex-direction: column; align-items: center;
             text-align: center; margin-bottom: 80px; 
         }
-        .summary-image {
-            width: 100%; max-width: 900px; height: auto;
-            border-radius: 10px; margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border: 1px solid rgba(100, 255, 218, 0.2);
-        }
+        /* Image style removed */
 
         /* --- MAGAZINE HIGHLIGHT --- */
         .magazine-highlight {
@@ -91,7 +85,7 @@
             margin-bottom: 20px; 
         }
 
-        /* --- CONTENT CARDS (Research, Workshops) --- */
+        /* --- CONTENT CARDS --- */
         .content-card { 
             background: var(--secondary); 
             padding: 50px; 
@@ -159,7 +153,6 @@
     <div class="container">
         
         <div class="summary-section">
-            <img src="https://images.unsplash.com/photo-1518137385311-370ae697940b?q=80&w=1000" alt="RGC Science Club Team" class="summary-image">
             <p style="color: var(--text-light); max-width: 850px; font-size: 1.1rem;">
                 At RGC Science Club, we believe that science is not just about memorizing facts, but about exploring the unknown. From theoretical discussions to practical applications, our club serves as a vibrant ecosystem for young minds. We bridge the gap between academic curriculum and real-world innovation through a structured series of activities designed to challenge and inspire.
             </p>
@@ -229,5 +222,5 @@
     </footer>
 
 </body>
-  </html>
-              
+    </html>
+    
